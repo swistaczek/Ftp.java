@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project name="Ftp" default="all" basedir=".">
+    <property name="name" value="Ftp"/>
+    <property name="src" value="src"/>
+    <property name="build" value="build"/>
+    <property name="lib" value="lib"/>
+    <property name="api" value="doc/api"/>
+    <property name="classpath" value="${lib}/${name}.jar"/>
+    <property name="package" value="org.lewk.ftp"/>
+    <property name="main" value="${package}.Ftp"/>
+
+    <!-- Compile the project -->
+    <target name="build">
+        <mkdir dir="${build}"/>
+        <javac srcdir="${src}" destdir="${build}" debug="on"/>
+    </target>
+
+    <!-- Clean up class files and javadocs -->
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${api}"/>
+        <delete dir="${lib}"/>
+    </target>
+
+    <!-- Generate javadocs
+    <target name="api" description="Generate Javadocs">
+        <javadoc sourcepath="${src}" destdir="${api}"
+                 packagenames="edu.rit.datacomm.ftp"/>
+    </target>
+    -->
+
+    <!-- Build a jar file -->
+    <target name="jar" depends="build">
+        <mkdir dir="${lib}"/>
+        <jar jarfile="${lib}/${name}.jar" manifest="Manifest" basedir="${build}"/>
+    </target>
+
+    <!-- Build everything, and make javadocs -->
+    <target name="all" depends="clean,jar"/>
+
+</project>
